@@ -1,0 +1,11 @@
+include(build_utils)
+add_executable(
+        gtest_thread_pool
+        gtest_thread_pool.cpp
+)
+target_link_libraries(
+        gtest_thread_pool
+        PUBLIC
+        thread_pool
+)
+GTest_add_target(gtest_thread_pool)
