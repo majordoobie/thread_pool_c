@@ -236,7 +236,10 @@ static int8_t init_workers(thpool_t * thpool)
  */
 void thpool_wait(thpool_t * thpool)
 {
-    assert(thpool);
+    if (NULL == thpool)
+    {
+        return;
+    }
 
     mtx_lock(&thpool->wait_mutex);
     while ((0 != atomic_load(&thpool->workers_working)) || (0 != atomic_load(&thpool->work_queue->job_count)))
@@ -268,7 +271,10 @@ void thpool_destroy(thpool_t ** thpool_ptr)
         return;
     }
     thpool_t * thpool = * thpool_ptr;
-    assert(thpool);
+    if (NULL == thpool)
+    {
+        return;
+    }
 
     // Set running bool to false and set the queue to have a value of 1
     // instructing the threads to look for work.
@@ -300,9 +306,10 @@ void thpool_destroy(thpool_t ** thpool_ptr)
  */
 thpool_status thpool_enqueue_job(thpool_t * thpool, void (* job_function)(void *), void * job_arg)
 {
-    // No need to check args, args can be NULL
-    assert(thpool);
-    assert(job_function);
+    if ((NULL == thpool) || (NULL == job_function))
+    {
+        return THP_FAILURE;
+    }
 
     job_t * job = (job_t *)malloc(sizeof(job_t));
     if (UV_INVALID_ALLOC == verify_alloc(job))
