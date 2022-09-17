@@ -1,5 +1,5 @@
-#ifndef JG_NETCALC_SRC_THREAD_POOL_THREAD_POOL_H_
-#define JG_NETCALC_SRC_THREAD_POOL_THREAD_POOL_H_
+#ifndef THREAD_POOL_THREAD_POOL_H_
+#define THREAD_POOL_THREAD_POOL_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -62,4 +62,4 @@ thpool_status thpool_enqueue_job(thpool_t * thpool, void (* job_function)(void *
 #ifdef __cplusplus
 }
 #endif //END __cplusplus
-#endif //JG_NETCALC_SRC_THREAD_POOL_THREAD_POOL_H_
+#endif //THREAD_POOL_THREAD_POOL_H_

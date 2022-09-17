@@ -57,5 +57,26 @@ TEST_F(ThreadPoolTextFixture, TestMultiUpdating)
     free(val);
 }
 
+void callback(void * data)
+{
+    std::atomic_uint_fast64_t * val = (std::atomic_uint_fast64_t *)data;
+    printf("The atomic value is set to %ld\n", std::atomic_fetch_add(val, 1));
+}
+
+TEST(README_DEMO, README_DEMO_TEST)
+{
+    std::atomic_uint_fast64_t * val = (std::atomic_uint_fast64_t *)calloc(1, sizeof(std::atomic_uint_fast64_t));
+    thpool_t * thpool = thpool_init(4);
+
+    for (int i = 0; i < 20; i++)
+    {
+        thpool_enqueue_job(thpool, callback, val);
+    }
+
+    thpool_wait(thpool);
+    thpool_destroy(&thpool);
+    free(val);
+}
+
 
 

@@ -9,10 +9,6 @@ set(CMAKE_CXX_STANDARD 20)
 # Add the cmake modules directory to call functions in them
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 
-# Create the variable for where all the tests will go in the build tree
-# this will make it easier to execute all the test binaries
-#set(TEST_BUILD_PATH ${CMAKE_BINARY_DIR}/test_bin)
-
 # Include the deps
 include(deps)
 include(build_utils)
