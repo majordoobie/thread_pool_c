@@ -10,7 +10,7 @@ The dependency is automatically cloned using CMAKE
 ```bash
 cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build
 cmake --build build -j $(nproc)
-./build/test_bin/gtest_thread_pool
+ctest -j $(nproc) --test-dir build
 ```
 
 ## Example:
