@@ -1,9 +1,19 @@
 # thread_pool_c
-
 Thread pool written in C using the cross-platform threads.h library and
 atomic functions to control thread synchronization. 
 
-Example:
+## Dependencies 
+The project depends on gtest which is only needed when the `build type` is `DEBUG`.
+The dependency is automatically cloned using CMAKE
+
+## How to compile
+```bash
+cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build
+cmake --build build -j $(nproc)
+./build/test_bin/gtest_thread_pool
+```
+
+## Example:
 ```c
 void callback(void * data)
 {
