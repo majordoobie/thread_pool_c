@@ -17,9 +17,14 @@ include(build_utils)
 add_library(thread_pool SHARED thread_pool.c)
 set_project_properties(thread_pool ${PROJECT_SOURCE_DIR})
 
-# If debug is enabled make sure to include CTest at the root. This will allow
-# the ctest config to be placed at the root of the build directory
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    include(CTest)
-    add_subdirectory(tests)
+# Flag is used to build the gtest binaries
+option(BUILD_THPOOL_GTEST "Build GTests for thread_pool_c" ON)
+
+if (BUILD_THPOOL_GTEST)
+    # If debug is enabled make sure to include CTest at the root. This will allow
+    # the ctest config to be placed at the root of the build directory
+    IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        include(CTest)
+    ENDIF()
 ENDIF()
+
